@@ -36,7 +36,7 @@
 				</hbox>
 				<hbox flex="0" align="center">
 					<label value="&cookies-xtrm.Delay;"/>
-					<textbox id="cleanDelay" type="number" width="40" min="10" max="600"/>
+					<textbox id="cleanDelay" type="number" width="40" min="1" max="600"/>
 					<label value="&cookies-xtrm.Seconds;"/>
 				</hbox>
 				<spacer flex="0" height="15"/>

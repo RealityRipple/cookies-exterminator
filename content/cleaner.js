@@ -47,7 +47,7 @@ let Cleaner = function(Prefs, Buttons, Whitelist, Log, Notifications, Utils) {
 	this.indexedDBTracker = {};
 
 	this.trackIndexedDB = function(domain) {
-		this.indexedDBTracker[domain] = Date.now() + (Prefs.getValue("cleanDelay") - 3) * 1000;
+		this.indexedDBTracker[domain] = Date.now() + Prefs.getValue("cleanDelay") * 1000;
 	}
 
 	this.quotaCallback = {
@@ -72,7 +72,7 @@ let Cleaner = function(Prefs, Buttons, Whitelist, Log, Notifications, Utils) {
 	};
 
 	this.trackTabs = function(uri) {
-		this.tabsTracker[Utils.getBaseDomain(uri.host)] = Date.now() + (Prefs.getValue("cleanDelay") - 3) * 1000;
+		this.tabsTracker[Utils.getBaseDomain(uri.host)] = Date.now() + Prefs.getValue("cleanDelay") * 1000;
 		if (Prefs.getValue("cleanIndexedDB")) {
 			try {
 				if (typeof quotaManager.getUsageForURI === "function") {
@@ -100,11 +100,11 @@ let Cleaner = function(Prefs, Buttons, Whitelist, Log, Notifications, Utils) {
 					if (this.cookiesCleanAll) {
 						this.cookiesCleanAll = false;
 						this.cookiesToClean = [];
-						Utils.setTimeout(this.execute.bind(this, "CleanAll"), Prefs.getValue("cleanDelay") - 3);
+						Utils.setTimeout(this.execute.bind(this, "CleanAll"), Prefs.getValue("cleanDelay"));
 					} else {
 						let cookies = this.cookiesToClean;
 						this.cookiesToClean = [];
-						Utils.setTimeout(this.execute.bind(this, cookies), Prefs.getValue("cleanDelay") - 3);
+						Utils.setTimeout(this.execute.bind(this, cookies), Prefs.getValue("cleanDelay"));
 					}
 				} else {
 					master = !this.cookiesCleanAll && this.cookiesToClean.length == 0;
